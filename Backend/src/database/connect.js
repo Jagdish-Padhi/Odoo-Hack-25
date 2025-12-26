@@ -1,12 +1,18 @@
-import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const connectDB = async () => {
-    try {
-        await mongoose.connect(`${process.env.MONGODB_URI}`);
-    } catch (error) {
-        console.log("MongoDB connection error: ", error);
-        process.exit(1);;
-    }
-};
+import pkg from 'pg';
+const { Pool } = pkg;
 
-export default connectDB;
+if (!process.env.DB_URL) {
+    console.error('DB_URL environment variable is not set!');
+}
+
+const pool = new Pool({
+    connectionString: process.env.DB_URL,
+    ssl: {
+        rejectUnauthorized: false,
+    },
+});
+
+export default pool;
