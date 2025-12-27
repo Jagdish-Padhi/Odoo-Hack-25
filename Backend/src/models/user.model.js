@@ -41,6 +41,12 @@ const userSchema = new mongoose.Schema(
             minlength: [6, "Password must be at least 6 characters"],
         },
 
+        role: {
+            type: String,
+            enum: ["USER", "TECHNICIAN", "MANAGER"],
+            default: "USER",
+        },
+
         refreshToken: {
             type: String,
         },
@@ -67,6 +73,7 @@ userSchema.methods.generateAccessToken = function () {
             email: this.email,
             username: this.username,
             fullName: this.fullName,
+            role: this.role,
         },
         process.env.ACCESS_TOKEN_SECRET,
 
