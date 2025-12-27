@@ -30,3 +30,22 @@ export const verifyJWT = asyncHandler(async (req, res, next) => {
     throw new ApiError(401, error?.message || "Invalid access token!");
   }
 });
+
+// Role-based authorization middleware
+// Usage: authorizeRoles("MANAGER", "TECHNICIAN")
+export const authorizeRoles = (...allowedRoles) => {
+  return (req, res, next) => {
+    if (!req.user) {
+      throw new ApiError(401, "Please login first");
+    }
+
+    if (!allowedRoles.includes(req.user.role)) {
+      throw new ApiError(
+        403,
+        `Access denied. This action requires one of these roles: ${allowedRoles.join(", ")}`
+      );
+    }
+
+    next();
+  };
+};

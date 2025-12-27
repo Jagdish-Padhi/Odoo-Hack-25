@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Users as UsersIcon, Mail, Wrench, Edit, Trash2, UserPlus, UserMinus } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { useAuth } from '../context/AuthContext';
 import Card from '../components/common/Card';
 import Badge from '../components/common/Badge';
 import Button from '../components/common/Button';
@@ -11,6 +12,7 @@ import { userAPI } from '../services/api';
 
 const Teams = () => {
     const { teams, requests, addTeam, updateTeam, deleteTeam, addTechnician, removeTechnician, getRequestsByTeam } = useApp();
+    const { isManager } = useAuth();
     const [showAddModal, setShowAddModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -190,13 +192,15 @@ const Teams = () => {
                         Manage your maintenance teams and members
                     </p>
                 </div>
-                <Button
-                    variant="primary"
-                    icon={<Plus size={20} />}
-                    onClick={() => setShowAddModal(true)}
-                >
-                    Add Team
-                </Button>
+                {isManager && (
+                    <Button
+                        variant="primary"
+                        icon={<Plus size={20} />}
+                        onClick={() => setShowAddModal(true)}
+                    >
+                        Add Team
+                    </Button>
+                )}
             </div>
 
             {/* Stats */}
@@ -261,34 +265,38 @@ const Teams = () => {
                                             <p className="text-sm text-secondary-500">{memberCount} members</p>
                                         </div>
                                     </div>
-                                    <div className="flex gap-1">
-                                        <button
-                                            onClick={() => openEditModal(team)}
-                                            className="p-2 text-secondary-400 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
-                                        >
-                                            <Edit size={16} />
-                                        </button>
-                                        <button
-                                            onClick={() => openDeleteModal(team)}
-                                            className="p-2 text-secondary-400 hover:text-danger-600 hover:bg-danger-50 rounded-lg transition-colors"
-                                        >
-                                            <Trash2 size={16} />
-                                        </button>
-                                    </div>
+                                    {isManager && (
+                                        <div className="flex gap-1">
+                                            <button
+                                                onClick={() => openEditModal(team)}
+                                                className="p-2 text-secondary-400 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
+                                            >
+                                                <Edit size={16} />
+                                            </button>
+                                            <button
+                                                onClick={() => openDeleteModal(team)}
+                                                className="p-2 text-secondary-400 hover:text-danger-600 hover:bg-danger-50 rounded-lg transition-colors"
+                                            >
+                                                <Trash2 size={16} />
+                                            </button>
+                                        </div>
+                                    )}
                                 </div>
 
                                 {/* Members List */}
                                 <div className="space-y-2">
                                     <div className="flex items-center justify-between">
                                         <span className="text-sm font-medium text-secondary-700">Team Members</span>
-                                        <Button
-                                            variant="secondary"
-                                            size="sm"
-                                            icon={<UserPlus size={14} />}
-                                            onClick={() => openAddMemberModal(team)}
-                                        >
-                                            Add
-                                        </Button>
+                                        {isManager && (
+                                            <Button
+                                                variant="secondary"
+                                                size="sm"
+                                                icon={<UserPlus size={14} />}
+                                                onClick={() => openAddMemberModal(team)}
+                                            >
+                                                Add
+                                            </Button>
+                                        )}
                                     </div>
 
                                     {team.technicians && team.technicians.length > 0 ? (
@@ -313,15 +321,17 @@ const Teams = () => {
                                                             )}
                                                         </div>
                                                     </div>
-                                                    <button
-                                                        onClick={() => {
-                                                            setSelectedTeam(team);
-                                                            handleRemoveMember(tech._id || tech);
-                                                        }}
-                                                        className="p-1 text-secondary-400 hover:text-danger-600 rounded"
-                                                    >
-                                                        <UserMinus size={14} />
-                                                    </button>
+                                                    {isManager && (
+                                                        <button
+                                                            onClick={() => {
+                                                                setSelectedTeam(team);
+                                                                handleRemoveMember(tech._id || tech);
+                                                            }}
+                                                            className="p-1 text-secondary-400 hover:text-danger-600 rounded"
+                                                        >
+                                                            <UserMinus size={14} />
+                                                        </button>
+                                                    )}
                                                 </div>
                                             ))}
                                         </div>

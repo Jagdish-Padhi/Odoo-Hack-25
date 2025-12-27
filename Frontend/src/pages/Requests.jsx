@@ -26,7 +26,8 @@ const REVERSE_STATUS_MAP = {
 
 const Requests = () => {
   const { requests, equipment, teams, addRequest, updateRequest } = useApp();
-  const { user } = useAuth();
+  const { user, isManager, isTechnician } = useAuth();
+  const canUpdateStatus = isManager || isTechnician;
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showDurationModal, setShowDurationModal] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState(null);
@@ -92,18 +93,20 @@ const Requests = () => {
   };
 
   const handleDragStart = (e, request) => {
+    if (!canUpdateStatus) return;
     setDraggedItem(request);
     e.dataTransfer.effectAllowed = 'move';
   };
 
   const handleDragOver = (e) => {
+    if (!canUpdateStatus) return;
     e.preventDefault();
     e.dataTransfer.dropEffect = 'move';
   };
 
   const handleDrop = async (e, newStatus) => {
     e.preventDefault();
-    if (!draggedItem) return;
+    if (!draggedItem || !canUpdateStatus) return;
 
     const currentStatus = STATUS_MAP[draggedItem.status] || draggedItem.status;
     if (currentStatus === newStatus) {
@@ -241,12 +244,12 @@ const Requests = () => {
                   return (
                     <div
                       key={request._id}
-                      draggable
+                      draggable={canUpdateStatus}
                       onDragStart={(e) => handleDragStart(e, request)}
                       onClick={() => setSelectedRequest(request)}
                       className={`
                                                 bg-white p-4 rounded-lg shadow-sm border-2 border-secondary-200
-                                                cursor-move hover:shadow-md hover:border-primary-300
+                                                ${canUpdateStatus ? 'cursor-move' : 'cursor-pointer'} hover:shadow-md hover:border-primary-300
                                                 transition-all duration-200
                                                 ${overdue ? 'border-l-4 border-l-danger-500' : ''}
                                                 ${draggedItem?._id === request._id ? 'opacity-50' : ''}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Plus, Search, Filter, Package, MapPin, Wrench, AlertTriangle, Trash2, Edit, Eye } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import Card from '../components/common/Card';
 import Badge from '../components/common/Badge';
@@ -11,6 +12,7 @@ import Select from '../components/common/Select';
 
 const Equipment = () => {
   const { equipment, teams, addEquipment, updateEquipment, deleteEquipment, scrapEquipment, getRequestsByEquipment } = useApp();
+  const { isManager } = useAuth();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
@@ -193,13 +195,15 @@ const Equipment = () => {
             Manage all equipment and their maintenance
           </p>
         </div>
-        <Button
-          variant="primary"
-          icon={<Plus size={20} />}
-          onClick={() => setShowAddModal(true)}
-        >
-          Add Equipment
-        </Button>
+        {isManager && (
+          <Button
+            variant="primary"
+            icon={<Plus size={20} />}
+            onClick={() => setShowAddModal(true)}
+          >
+            Add Equipment
+          </Button>
+        )}
       </div>
 
       {/* Stats */}
@@ -325,15 +329,17 @@ const Equipment = () => {
                   >
                     View
                   </Button>
-                  <Button
-                    variant="secondary"
-                    size="sm"
-                    icon={<Edit size={16} />}
-                    onClick={() => openEditModal(eq)}
-                    disabled={eq.status === 'SCRAPPED'}
-                  >
-                    Edit
-                  </Button>
+                  {isManager && (
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      icon={<Edit size={16} />}
+                      onClick={() => openEditModal(eq)}
+                      disabled={eq.status === 'SCRAPPED'}
+                    >
+                      Edit
+                    </Button>
+                  )}
                   <Button
                     variant="primary"
                     size="sm"
@@ -342,7 +348,7 @@ const Equipment = () => {
                   >
                     Maintenance
                   </Button>
-                  {eq.status === 'ACTIVE' && (
+                  {isManager && eq.status === 'ACTIVE' && (
                     <Button
                       variant="danger"
                       size="sm"
@@ -368,7 +374,7 @@ const Equipment = () => {
             <p className="text-secondary-600 mb-4">
               {searchTerm ? 'Try adjusting your search' : 'Get started by adding your first equipment'}
             </p>
-            {!searchTerm && (
+            {!searchTerm && isManager && (
               <Button variant="primary" onClick={() => setShowAddModal(true)}>
                 Add Equipment
               </Button>

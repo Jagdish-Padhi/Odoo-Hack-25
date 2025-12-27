@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { ChevronLeft, ChevronRight, Plus, Calendar as CalendarIcon, Wrench } from 'lucide-react';
 import { useApp } from '../context/AppContext';
+import { useAuth } from '../context/AuthContext';
 import Card from '../components/common/Card';
 import Badge from '../components/common/Badge';
 import Button from '../components/common/Button';
@@ -11,6 +12,7 @@ import Select from '../components/common/Select';
 
 const Calendar = () => {
   const { requests, equipment, teams, addRequest } = useApp();
+  const { isManager } = useAuth();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -100,8 +102,8 @@ const Calendar = () => {
 
     if (dayData.requests.length > 0) {
       setShowDayModal(true);
-    } else {
-      // Open create modal with pre-filled date
+    } else if (isManager) {
+      // Only managers can create preventive maintenance
       const dateStr = clickedDate.toISOString().split('T')[0];
       setFormData(prev => ({ ...prev, scheduledDate: dateStr }));
       setShowCreateModal(true);
@@ -452,9 +454,11 @@ const Calendar = () => {
               <Button variant="secondary" onClick={() => setShowDayModal(false)}>
                 Close
               </Button>
-              <Button variant="primary" icon={<Plus size={16} />} onClick={handleCreateFromDay}>
-                Add Maintenance
-              </Button>
+              {isManager && (
+                <Button variant="primary" icon={<Plus size={16} />} onClick={handleCreateFromDay}>
+                  Add Maintenance
+                </Button>
+              )}
             </div>
           </div>
         )}

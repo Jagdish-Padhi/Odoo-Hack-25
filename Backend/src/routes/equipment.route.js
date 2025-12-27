@@ -8,21 +8,24 @@ import {
     scrapEquipment,
     getEquipmentRequests,
 } from "../controllers/equipment.controller.js";
-import { verifyJWT } from "../middlewares/auth.middleware.js";
+import { verifyJWT, authorizeRoles } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
 // All routes are protected
 router.use(verifyJWT);
 
+// Read routes - all authenticated users can view
 router.get("/", getAllEquipment);
 router.get("/:id", getEquipmentById);
-router.post("/", createEquipment);
-router.put("/:id", updateEquipment);
-router.delete("/:id", deleteEquipment);
-
-// Special routes
-router.patch("/:id/scrap", scrapEquipment);
 router.get("/:id/requests", getEquipmentRequests);
+
+// Write routes - MANAGER only
+router.post("/", authorizeRoles("MANAGER"), createEquipment);
+router.put("/:id", authorizeRoles("MANAGER"), updateEquipment);
+router.delete("/:id", authorizeRoles("MANAGER"), deleteEquipment);
+
+// Scrap equipment - MANAGER only
+router.patch("/:id/scrap", authorizeRoles("MANAGER"), scrapEquipment);
 
 export default router;
