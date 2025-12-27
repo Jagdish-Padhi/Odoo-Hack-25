@@ -1,69 +1,146 @@
-# 🏆 Project Name
+# 🛠️ GearGuard - Smart Maintenance Management System
 
-**Hackathon:** Odoo Hack 2025 | **Team:** [Our Team Name] | **Track:** [Your Track]
+**Hackathon:** Odoo Hack 2025 | **Team:** InnoBits | **Track:** Enterprise Operations
 
-> One-line problem statement and solution summary.
+> Transforming chaotic maintenance workflows into organized, predictive operations through intelligent request routing and visual tracking.
 
 ---
 
 ## 🎯 Problem Statement
-[Brief description of the problem you're solving - 2-3 sentences max]
+Managing equipment maintenance in organizations is fragmented, leading to delayed repairs, missed preventive schedules, and poor visibility. Teams struggle to track breakdowns, assign responsibilities, and plan maintenance efficiently using traditional methods.
 
 ## 💡 Solution
-[How your solution addresses the problem - 2-3 sentences max]
+A centralized maintenance tracking system connecting equipment, teams, and requests in one workflow. Real-time Kanban tracking, preventive calendar scheduling, and automated team assignment ensure faster, organized maintenance operations.
 
 ---
 
 ## 🚀 Key Features
-- ✅ Feature 1
-- ✅ Feature 2
-- ✅ Feature 3
+
+### ✅ Equipment Management
+- Full CRUD operations (Add, View, Edit, Delete)
+- Track: Name, Serial Number, Location, Assigned Team
+- **Scrap functionality** to mark inactive equipment
+- **"Maintenance" button** - Quick access to all related requests with pending count
+
+### ✅ Maintenance Teams
+- Create & manage specialized teams (Electrical, Mechanical, HVAC)
+- Add/Remove technicians with role validation
+- View team workload and assigned requests
+
+### ✅ Maintenance Requests
+- **Two types:** Corrective (breakdown) & Preventive (scheduled)
+- **Auto-assign team** based on selected equipment
+- **Status flow:** `NEW` → `IN_PROGRESS` → `REPAIRED` → `SCRAP`
+- **Duration logging** when marking as repaired
+- Filter by status, priority, type, equipment
+
+### ✅ Kanban Board
+- Visual 4-column layout by status
+- **Drag-and-drop** status updates
+- Overdue requests highlighted in red
+- Priority badges (HIGH/MEDIUM/LOW)
+
+### ✅ Preventive Calendar
+- Monthly view with navigation
+- **Click date** to create preventive request
+- Visual indicators for scheduled maintenance
+- Filter by month/year
+
+### ✅ Dashboard
+- Real-time stats: Equipment, Teams, Active Requests, Overdue
+- Recent requests list
+- Upcoming preventive maintenance
+- Quick action buttons
+
+### ✅ Authentication & Authorization
+- JWT-based authentication (Access + Refresh tokens)
+- Role-based access: `USER`, `TECHNICIAN`, `MANAGER`
+- Protected routes with automatic token refresh
 
 ---
 
 ## 🛠️ Tech Stack
-| Category | Technology |
-|----------|-----------|
-| Frontend | React, Vite |
-| Backend | Node.js, Express |
-| Database | MongoDB, Firebase real-time DB |
-| Auth | Firebase authentication |
-| Deployement | Render Platform
+
+| Layer | Technology |
+|-------|------------|
+| **Frontend** | React 18, Vite, TailwindCSS, React Router v6 |
+| **Backend** | Node.js, Express.js, REST API |
+| **Database** | MongoDB Atlas, Mongoose ODM |
+| **Auth** | JWT (Access + Refresh Tokens), bcrypt |
+| **State** | React Context API |
+| **Icons** | Lucide React |
 
 ---
 
 ## ⚡ Quick Start
+
 ```bash
-# Clone and setup
+# Clone repository
 git clone <repo-url>
-cd repo-name
+cd Odoo-Hack-25
+
+# Backend setup
+cd Backend
 npm install
+cp .env.example .env  # Configure MongoDB URI & JWT secrets
+npm run dev           # Runs on :5000
 
-# Run backend
-cd Backend && npm run dev
-
-# Run frontend (new terminal)
-cd Frontend && npm run dev
+# Frontend setup (new terminal)
+cd Frontend
+npm install
+npm run dev           # Runs on :5173
 ```
 
-## 🔥 **Live link** - [Click here](#) 
-## 🎥 **Demo Video** -  [Click here](#) 
-## ✅ **PPT link** -  [Click here](#)
+### Environment Variables
+
+**Backend (.env)**
+```env
+MONGODB_URI=your_mongodb_connection_string
+PORT=5000
+ACCESS_TOKEN_SECRET=your_secret
+REFRESH_TOKEN_SECRET=your_secret
+ACCESS_TOKEN_EXPIRY=1d
+REFRESH_TOKEN_EXPIRY=7d
+CORS_ORIGIN=http://localhost:5173
+```
+
+**Frontend (.env)**
+```env
+VITE_API_URL=http://localhost:5000/api/v1
+```
+
+
 
 ---
 
-## 📊 Project Structure
-```
-.
-├── Backend/     (API & Database logic)
-├── Frontend/    (UI & User interactions)
-└── README.md
-```
+## 🔗 API Endpoints
+
+| Module | Endpoints |
+|--------|-----------|
+| **Auth** | `POST /register`, `/login`, `/logout`, `/refresh-token` |
+| **Equipment** | `GET/POST /equipment`, `PUT/DELETE /:id`, `PATCH /:id/scrap` |
+| **Teams** | `GET/POST /teams`, `PUT/DELETE /:id`, `POST/DELETE /:id/technicians` |
+| **Requests** | `GET/POST /requests`, `PATCH /:id/status`, `GET /kanban`, `/preventive` |
 
 ---
 
-## 👥 Built by Team InnoBits
-- [Saman Pandey](https://github.com/SamanPandey-in) - UI/UX & Design/Docs
-- [Jagdish Padhi](https://github.com/Jagdish-Padhi) - Backend & Integrations
-- [Twinkle Gupta](https://github.com/twinkle-2101) - Backend & PPT
-- [Poorvaja Joshi](https://github.com/poorvaja-1603) - AI/ML & PPT
+## 👥 Team InnoBits
+
+| Member | Role | GitHub |
+|--------|------|--------|
+| **Saman Pandey** | UI/UX Design & Documentation | [@SamanPandey-in](https://github.com/SamanPandey-in) |
+| **Jagdish Padhi** | Backend, Database & Integration | [@Jagdish-Padhi](https://github.com/Jagdish-Padhi) |
+| **Twinkle Gupta** | Backend Development | [@twinkle-2101](https://github.com/twinkle-2101) |
+| **Poorvaja Joshi** | Backend, Video & Docs | [@poorvaja-1603](https://github.com/poorvaja-1603) |
+
+---
+
+## 🔮 Future Scope
+- Email/Push notifications for overdue requests
+- Advanced analytics dashboard
+- Mobile app (React Native)
+- IoT sensor integration for predictive maintenance
+
+---
+
+**Built with ❤️ for Odoo Hack 2025 by Team InnoBits**
