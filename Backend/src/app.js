@@ -17,8 +17,10 @@ app.use(cookieParser());
 // routes
 import authRoutes from './routes/auth.route.js';
 import userRoutes from './routes/user.route.js';
+import reqRoutes from './routes/req.routes.js';
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api', reqRoutes);
 
 // error handler
 app.use(globalErrorHandler);
