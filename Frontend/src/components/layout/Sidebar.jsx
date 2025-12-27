@@ -18,13 +18,13 @@ const Sidebar = ({ isOpen, onClose, isCollapsed, toggleCollapse }) => {
   const { user } = useAuth();
 
   const navigation = [
-    { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard, roles: ['admin', 'manager', 'technician'] },
-    { name: 'Equipment', href: '/equipment', icon: Package, roles: ['admin', 'manager', 'technician'] },
-    { name: 'Teams', href: '/teams', icon: Users, roles: ['admin', 'manager'] },
-    { name: 'Requests', href: '/requests', icon: ClipboardList, roles: ['admin', 'manager', 'technician'] },
-    { name: 'Calendar', href: '/calendar', icon: Calendar, roles: ['admin', 'manager', 'technician'] },
-    { name: 'Reports', href: '/reports', icon: BarChart3, roles: ['admin', 'manager'] },
-    { name: 'Settings', href: '/settings', icon: Settings, roles: ['admin'] },
+    { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard, roles: ['USER', 'MANAGER', 'TECHNICIAN'] },
+    { name: 'Equipment', href: '/equipment', icon: Package, roles: ['USER', 'MANAGER', 'TECHNICIAN'] },
+    { name: 'Teams', href: '/teams', icon: Users, roles: ['MANAGER', 'TECHNICIAN'] },
+    { name: 'Requests', href: '/requests', icon: ClipboardList, roles: ['USER', 'MANAGER', 'TECHNICIAN'] },
+    { name: 'Calendar', href: '/calendar', icon: Calendar, roles: ['USER', 'MANAGER', 'TECHNICIAN'] },
+    { name: 'Reports', href: '/reports', icon: BarChart3, roles: ['MANAGER'] },
+    { name: 'Settings', href: '/settings', icon: Settings, roles: ['MANAGER'] },
   ];
 
   const filteredNavigation = navigation.filter(item =>
