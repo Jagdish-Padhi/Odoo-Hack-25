@@ -65,8 +65,10 @@ export const authAPI = {
 
 export const userAPI = {
     getCurrentUser: () => api.get('/users/me'),
-    updateProfile: (data) => api.put('/users/update-account', data),
-    changePassword: (data) => api.put('/users/change-password', data),
+    updateProfile: (data) => api.patch('/users/update', data),
+    changePassword: (data) => api.post('/users/change-password', data),
+    getAllTechnicians: () => api.get('/users/technicians'),
+    getAll: (params) => api.get('/users', { params }),
 };
 
 
