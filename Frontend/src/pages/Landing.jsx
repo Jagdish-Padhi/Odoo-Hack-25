@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CheckCircle2,
@@ -16,11 +16,20 @@ import {
 import Button from '../components/common/Button';
 
 const Landing = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   const features = [
     {
       icon: <Wrench size={24} />,
-      title: 'Equipment Tracking',
-      description: 'Track all your assets in one place with detailed records and maintenance history.',
+      title: 'One-Click Asset Intelligence',
+      description: "Never hunt for data again. Our 'Smart Button' technology provides an instant, filtered history of every repair.",
     },
     {
       icon: <Users size={24} />,
@@ -67,15 +76,20 @@ const Landing = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="border-b border-secondary-200 bg-white/80 backdrop-blur-md fixed w-full top-0 z-50">
+      <nav
+        className={`fixed z-50 transition-all duration-300 ease-in-out ${isScrolled
+          ? 'top-0 inset-x-0 bg-white/90 backdrop-blur-md border-b border-secondary-200 shadow-sm'
+          : 'top-4 inset-x-4 bg-white/70 backdrop-blur-md border border-white/40 shadow-xl rounded-2xl'
+          }`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center shadow-lg p-0">
+              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm p-0">
                 <img
                   src="/logo.jpg"
                   alt="GearGuard logo"
-                  className="w-6 h-6 object-contain"
+                  className="w-10 h-10 object-contain rounded-lg shadow-md"
                 />
               </div>
 
@@ -120,7 +134,7 @@ const Landing = () => {
             </h1>
 
             <p className="text-xl sm:text-2xl text-secondary-600 mb-10 max-w-3xl mx-auto leading-relaxed">
-              Transform your maintenance operations with intelligent automation, real-time insights, and seamless team collaboration.
+              Stop reacting to breakdowns. Shift to a predictive maintenance culture that protects your bottom line and extends asset lifecycles by years.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
@@ -144,7 +158,7 @@ const Landing = () => {
             {/* Stats bar */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto mt-16">
               {stats.map((stat, index) => (
-                <div key={index} className="bg-white rounded-xl p-6 shadow-lg border border-secondary-100">
+                <div key={index} className="bg-white rounded-xl p-6 shadow border border-secondary-100">
                   <div className="flex justify-center mb-3 text-primary-600">
                     {stat.icon}
                   </div>
@@ -181,7 +195,7 @@ const Landing = () => {
               >
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-50 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="relative">
-                  <div className="w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center text-white mb-5 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-14 h-14 bg-primary-600 rounded-xl flex items-center justify-center text-white mb-5 shadow-md group-hover:scale-110 transition-transform duration-300">
                     {feature.icon}
                   </div>
                   <h3 className="text-xl font-semibold text-secondary-900 mb-3">
@@ -205,7 +219,7 @@ const Landing = () => {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <div className="inline-block px-4 py-2 bg-success-100 rounded-full text-success-700 text-sm font-semibold mb-4">
+              <div className="inline-block px-4 py-2 bg-secondary-200 rounded-full text-secondary-800 text-sm font-semibold mb-4">
                 PROVEN RESULTS
               </div>
               <h2 className="text-4xl sm:text-5xl font-display font-bold text-secondary-900 mb-6 leading-tight">
@@ -216,12 +230,17 @@ const Landing = () => {
               </p>
 
               <div className="space-y-4 mb-8">
-                {benefits.map((benefit, index) => (
+                {[
+                  { text: 'Zero-Gap Compliance: Ensure every asset meets 100% of regulatory safety standards automatically.' },
+                  { text: 'Zero-Manual Entry: Intelligent Auto-Fill pulls equipment history instantly.' },
+                  { text: 'Predictive Cost Shield: Identify failing assets algorithms before catastrophic failures.' },
+                  { text: 'Technician Autonomy: Mobile-first workflows for duration and completion recording.' }
+                ].map((item, index) => (
                   <div key={index} className="flex items-start gap-4 bg-white rounded-lg p-4 shadow-sm border border-secondary-100">
-                    <div className="flex-shrink-0 w-6 h-6 bg-success-100 rounded-full flex items-center justify-center mt-0.5">
-                      <CheckCircle2 className="text-success-600" size={16} />
+                    <div className="flex-shrink-0 w-6 h-6 bg-secondary-100 rounded-full flex items-center justify-center mt-0.5">
+                      <CheckCircle2 className="text-secondary-600" size={16} />
                     </div>
-                    <span className="text-secondary-700 font-medium">{benefit}</span>
+                    <span className="text-secondary-700 font-medium">{item.text}</span>
                   </div>
                 ))}
               </div>
@@ -234,36 +253,36 @@ const Landing = () => {
             </div>
 
             <div className="relative">
-              <div className="relative bg-gradient-to-br from-primary-500 to-primary-800 rounded-3xl p-1 shadow-2xl">
+              <div className="relative bg-white rounded-3xl p-1 shadow-2xl">
                 <div className="bg-white rounded-3xl p-8">
                   <div className="grid grid-cols-2 gap-6">
-                    <div className="bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl p-6 text-center">
-                      <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <div className="bg-secondary-50 rounded-2xl p-6 text-center">
+                      <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
                         <TrendingUp size={32} className="text-white" />
                       </div>
-                      <p className="text-3xl font-bold text-secondary-900 mb-1">40%</p>
-                      <p className="text-sm text-secondary-600">Less Downtime</p>
+                      <p className="text-3xl font-bold text-secondary-900 mb-1">99.9%</p>
+                      <p className="text-sm text-secondary-600">Asset Reliability</p>
                     </div>
-                    <div className="bg-gradient-to-br from-success-50 to-success-100 rounded-2xl p-6 text-center">
-                      <div className="w-16 h-16 bg-gradient-success rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <div className="bg-secondary-50 rounded-2xl p-6 text-center">
+                      <div className="w-16 h-16 bg-success-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Users size={32} className="text-white" />
+                      </div>
+                      <p className="text-3xl font-bold text-secondary-900 mb-1">95%</p>
+                      <p className="text-sm text-secondary-600">Team Utilization</p>
+                    </div>
+                    <div className="bg-secondary-50 rounded-2xl p-6 text-center">
+                      <div className="w-16 h-16 bg-warning-600 rounded-full flex items-center justify-center mx-auto mb-4">
                         <Clock size={32} className="text-white" />
                       </div>
-                      <p className="text-3xl font-bold text-secondary-900 mb-1">2x</p>
-                      <p className="text-sm text-secondary-600">Faster Response</p>
+                      <p className="text-3xl font-bold text-secondary-900 mb-1">1.2h</p>
+                      <p className="text-sm text-secondary-600">MTTR</p>
                     </div>
-                    <div className="bg-gradient-to-br from-warning-50 to-warning-100 rounded-2xl p-6 text-center">
-                      <div className="w-16 h-16 bg-gradient-warning rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <div className="bg-secondary-50 rounded-2xl p-6 text-center">
+                      <div className="w-16 h-16 bg-secondary-600 rounded-full flex items-center justify-center mx-auto mb-4">
                         <Shield size={32} className="text-white" />
                       </div>
-                      <p className="text-3xl font-bold text-secondary-900 mb-1">100%</p>
-                      <p className="text-sm text-secondary-600">Compliance</p>
-                    </div>
-                    <div className="bg-gradient-to-br from-secondary-100 to-secondary-200 rounded-2xl p-6 text-center">
-                      <div className="w-16 h-16 bg-gradient-secondary rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                        <BarChart3 size={32} className="text-white" />
-                      </div>
-                      <p className="text-3xl font-bold text-secondary-900 mb-1">30%</p>
-                      <p className="text-sm text-secondary-600">Cost Savings</p>
+                      <p className="text-3xl font-bold text-secondary-900 mb-1">$0</p>
+                      <p className="text-sm text-secondary-600">Cost of Inaction</p>
                     </div>
                   </div>
                 </div>
@@ -299,8 +318,12 @@ const Landing = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             <div className="col-span-1">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center shadow-lg">
-                  <span className="text-white font-bold text-xl">G</span>
+                <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm p-0">
+                  <img
+                    src="/logo.jpg"
+                    alt="GearGuard logo"
+                    className="w-10 h-10 object-contain rounded-lg shadow-md"
+                  />
                 </div>
                 <div>
                   <h3 className="text-xl font-display font-bold">GearGuard</h3>
