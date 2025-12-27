@@ -26,10 +26,14 @@ const Header = ({ toggleSidebar, sidebarOpen }) => {
             >
               {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
-            
+
             <Link to="/dashboard" className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">G</span>
+              <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center shadow-lg p-0">
+                <img
+                  src="/logo.jpg"
+                  alt="GearGuard logo"
+                  className="w-6 h-6 object-contain"
+                />
               </div>
               <div className="hidden sm:block">
                 <h1 className="text-xl font-display font-bold text-secondary-900">
@@ -72,17 +76,29 @@ const Header = ({ toggleSidebar, sidebarOpen }) => {
                     <p className="text-sm font-medium text-secondary-900">{user?.name}</p>
                     <p className="text-xs text-secondary-500">{user?.email}</p>
                   </div>
-                  
-                  <button className="w-full px-4 py-2 text-left text-sm text-secondary-700 hover:bg-secondary-50 flex items-center gap-3">
+
+                  <button
+                    onClick={() => {
+                      navigate('/settings');
+                      setShowProfileMenu(false);
+                    }}
+                    className="w-full px-4 py-2 text-left text-sm text-secondary-700 hover:bg-secondary-50 flex items-center gap-3"
+                  >
                     <User size={16} />
                     Profile
                   </button>
-                  
-                  <button className="w-full px-4 py-2 text-left text-sm text-secondary-700 hover:bg-secondary-50 flex items-center gap-3">
+
+                  <button
+                    onClick={() => {
+                      navigate('/settings');
+                      setShowProfileMenu(false);
+                    }}
+                    className="w-full px-4 py-2 text-left text-sm text-secondary-700 hover:bg-secondary-50 flex items-center gap-3"
+                  >
                     <Settings size={16} />
                     Settings
                   </button>
-                  
+
                   <div className="border-t border-secondary-200 mt-2 pt-2">
                     <button
                       onClick={handleLogout}
