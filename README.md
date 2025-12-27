@@ -18,6 +18,8 @@ We built a centralized maintenance tracking system that connects equipment, main
 
 ## 🚀 Key Features
 
+### Core Features
+
 - **Equipment Management**
 
   - Add, view, and manage equipment with key details (name, serial number, location, assigned team).
