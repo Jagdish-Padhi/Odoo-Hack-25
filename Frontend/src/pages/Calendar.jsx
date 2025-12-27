@@ -361,7 +361,7 @@ const Calendar = () => {
               onChange={handleChange}
               placeholder="Describe the maintenance task..."
               rows={3}
-              className="w-full px-4 py-2 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full h-11 px-4 py-2 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               required
             />
           </div>
