@@ -6,6 +6,14 @@
 
 ---
 
+## 🔗 Quick Links (For Real experience)
+
+| 🚀 Live Demo | 🎥 Video Walkthrough | 📊 Presentation |
+|:------------:|:-------------------:|:---------------:|
+| [**Launch App**](YOUR_DEPLOYED_LINK_HERE) | [**Watch Demo**](YOUR_VIDEO_LINK_HERE) | [**View PPT**](YOUR_PPT_LINK_HERE) |
+
+---
+
 ## 🎯 Problem Statement
 Managing equipment maintenance in organizations is fragmented, leading to delayed repairs, missed preventive schedules, and poor visibility. Teams struggle to track breakdowns, assign responsibilities, and plan maintenance efficiently using traditional methods.
 
@@ -126,12 +134,12 @@ VITE_API_URL=http://localhost:5000/api/v1
 
 ## 👥 Team InnoBits
 
-| Member | Role | GitHub |
-|--------|------|--------|
-| **Saman Pandey** | UI/UX Design & Documentation | [@SamanPandey-in](https://github.com/SamanPandey-in) |
-| **Jagdish Padhi** | Backend, Database & Integration | [@Jagdish-Padhi](https://github.com/Jagdish-Padhi) |
-| **Twinkle Gupta** | Backend Development | [@twinkle-2101](https://github.com/twinkle-2101) |
-| **Poorvaja Joshi** | Backend, Video & Docs | [@poorvaja-1603](https://github.com/poorvaja-1603) |
+| Member | Role |
+|--------|------|
+| [**Saman Pandey**](https://github.com/SamanPandey-in) | UI/UX Design & Documentation |
+| [**Jagdish Padhi**](https://github.com/Jagdish-Padhi) | Backend, Database & Integration |
+| [**Twinkle Gupta**](https://github.com/twinkle-2101) | Backend Development |
+| [**Poorvaja Joshi**](https://github.com/poorvaja-1603) | Backend, Video & Docs |
 
 ---
 
