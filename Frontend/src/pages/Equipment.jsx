@@ -316,7 +316,7 @@ const Equipment = () => {
                 </div>
 
                 {/* Actions */}
-                <div className="flex items-center gap-2 pt-2 border-t border-secondary-200">
+                <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-secondary-200">
                   <Button
                     variant="secondary"
                     size="sm"
