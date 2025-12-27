@@ -1,8 +1,8 @@
-# 🏆 Project Name
+# 🛠️ GearGuard - Smart Maintenance Management System
 
-**Hackathon:** Odoo Hack 2025 | **Team:** Innobits | **Track:** [Your Track]
+**Hackathon:** Odoo Hack 2025 | **Team:** Innobits | **Track:** Enterprise Operations
 
-> One-line problem statement and solution summary.
+> A centralized equipment maintenance system that streamlines breakdown handling and preventive maintenance using automated team assignment, Kanban-based tracking, and calendar-driven scheduling.
 
 ---
 
@@ -60,13 +60,6 @@ We built a centralized maintenance tracking system that connects equipment, main
 - Fully functional CRUD for requests, equipment, and teams.
 - Demo-ready within limited hackathon timeframe.
 
-### Optional/Future Enhancements (Not Implemented)
-
-- Advanced reporting and analytics.
-- Email or push notifications.
-- Role-based access control.
-- Dashboard charts and visual metrics.
-
 ---
 
 ## 🛠️ Tech Stack
@@ -96,9 +89,9 @@ cd Backend && npm run dev
 cd Frontend && npm run dev
 ```
 
-## 🔥 **Live link** - [Click here](#)
+## 🔥 **Live Demo** - [Launch App]
 
-## 🎥 **Demo Video** - [Click here](#)
+## 🎥 **Video Walkthrough** - [Watch Demo]
 
 ---
 
@@ -116,6 +109,19 @@ cd Frontend && npm run dev
 ## 👥 Built by Team InnoBits
 
 - [Saman Pandey](https://github.com/SamanPandey-in) - UI/UX & Design/Docs
-- [Jagdish Padhi](https://github.com/Jagdish-Padhi) - Backend & Integrations
-- [Twinkle Gupta](https://github.com/twinkle-2101) - Backend & PPT
-- [Poorvaja Joshi](https://github.com/poorvaja-1603) - Backend & PPT
+- [Jagdish Padhi](https://github.com/Jagdish-Padhi) - Backend, Database, Auth & Frontend Integration
+- [Twinkle Gupta](https://github.com/twinkle-2101) - Backend Development
+- [Poorvaja Joshi](https://github.com/poorvaja-1603) - Backend Development, Video and Documentation
+
+  ***
+
+## 🔮 Future Enhancements
+
+- Advanced reporting and analytics
+- Email/push notifications
+- Role-based access control
+- Dashboard charts and visual metrics
+- Mobile app (React Native)
+- IoT sensor integration
+
+**Built for Odoo Hack 2025 by Team InnoBits**
