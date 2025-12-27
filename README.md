@@ -21,6 +21,7 @@ Managing equipment maintenance in organizations is fragmented, leading to delaye
 ## 💡 Solution
 A centralized maintenance tracking system connecting equipment, teams, and requests in one workflow. Real-time Kanban tracking, preventive calendar scheduling, and automated team assignment ensure faster, organized maintenance operations.
 
+![](Frontend/public/overview.png)
 ---
 
 ## 🚀 Key Features
