@@ -29,6 +29,7 @@ export const getAllRequests = asyncHandler(
     }
 );
 
+
 export const getRequestById = asyncHandler(
     async (req, res, next) => {
         const { id } = req.params;
@@ -44,4 +45,28 @@ export const getRequestById = asyncHandler(
         return res.status(200).json(new ApiResponse(200, request, "Request fetched successfully!"));
 
     }
-)
+);
+
+
+export const createRequest = asyncHandler(
+    async (req, res, next) => {
+        
+        const { title, description, priority } = req.body;
+
+        if(!title || !description){
+            throw new ApiError(400, "Title and descriptions are required");
+        }
+
+        const request = await Request.create({
+            title, 
+            description,
+            priority: priority || "MEDIUM", 
+            requestedBy: req.user._id,
+        });
+
+        const populatedRequest = await Request.findById(request._id)
+        .populate("requestedBy", "fullName email");
+
+        return res.status(201).json(new ApiResponse(201, populatedRequest, "Request created successfully!"));
+    }
+);
