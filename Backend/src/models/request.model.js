@@ -15,10 +15,16 @@ const requestSchema = new mongoose.Schema(
             trim: true,
         },
 
+        type: {
+            type: String,
+            enum: ["CORRECTIVE", "PREVENTIVE"],
+            required: [true, "Request type is required"],
+        },
+
         status: {
             type: String,
-            enum: ["PENDING", "IN_PROGRESS", "COMPLETED"],
-            default: "PENDING",
+            enum: ["NEW", "IN_PROGRESS", "REPAIRED", "SCRAP"],
+            default: "NEW",
         },
 
         priority: {
@@ -27,15 +33,31 @@ const requestSchema = new mongoose.Schema(
             default: "MEDIUM",
         },
 
+        equipment: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Equipment",
+            required: [true, "Equipment is required"],
+        },
+
+        assignedTeam: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "MaintenanceTeam",
+            default: null,
+        },
+
         requestedBy: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
             required: true,
         },
 
-        assignedTo: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User",
+        duration: {
+            type: Number,  // in minutes
+            default: null,
+        },
+
+        scheduledDate: {
+            type: Date,
             default: null,
         },
     },
