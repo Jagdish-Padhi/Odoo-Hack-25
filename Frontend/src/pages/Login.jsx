@@ -49,17 +49,6 @@ const Login = () => {
             <div className="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-20 xl:px-24">
                 <div className="mx-auto w-full max-w-sm lg:w-96">
                     <div>
-                        <Link to="/" className="flex items-center gap-3 mb-8">
-                            <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center">
-                                <span className="text-white font-bold text-2xl">G</span>
-                            </div>
-                            <div>
-                                <h1 className="text-2xl font-display font-bold text-secondary-900">
-                                    GearGuard
-                                </h1>
-                            </div>
-                        </Link>
-
                         <h2 className="text-3xl font-display font-bold text-secondary-900">
                             Welcome back
                         </h2>
@@ -141,6 +130,20 @@ const Login = () => {
                     <div className="absolute inset-0 bg-black/20"></div>
                     <div className="absolute inset-0 flex items-center justify-center p-12">
                         <div className="text-center text-white">
+                            <Link to="/" className="flex items-center justify-center gap-3 mb-8">
+                                <div className="w-15 h-15 bg-gradient-primary rounded-lg flex items-center justify-center p-0">
+                                    <img
+                                        src="/logo.jpg"
+                                        alt="GearGuard logo"
+                                        className="w-15 h-15 object-contain rounded-lg"
+                                    />
+                                </div>
+                                <div>
+                                    <h1 className="text-3xl font-display font-bold text-white-900">
+                                        GearGuard
+                                    </h1>
+                                </div>
+                            </Link>
                             <h2 className="text-4xl font-display font-bold mb-4">
                                 Maintenance Made Simple
                             </h2>
