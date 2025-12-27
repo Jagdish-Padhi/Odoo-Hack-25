@@ -28,3 +28,20 @@ export const getAllRequests = asyncHandler(
         return res.status(200).json(new ApiResponse(200, requests, "Requests fetched successfully!"));
     }
 );
+
+export const getRequestById = asyncHandler(
+    async (req, res, next) => {
+        const { id } = req.params;
+
+        const request = await Request.findById(id)
+            .populate("requestedBy", "fullName email")
+            .populate("assignedTo", "fullName email");
+
+        if (!request) {
+            throw new ApiError(404, "Request not found");
+        }
+
+        return res.status(200).json(new ApiResponse(200, request, "Request fetched successfully!"));
+
+    }
+)
